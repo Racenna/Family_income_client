@@ -8,9 +8,9 @@ export const useRoutes = isAuthenticated => {
       //Routes for user in system
       <Switch>
         <Route path="/link" exact>
-          //some page
+          <h1>Some page</h1>
         </Route>
-        <Redirect to="/somelink" />
+        <Redirect to="/link" />
       </Switch>
     );
   }

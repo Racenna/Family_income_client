@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useHttp } from "../hooks/http.hook";
-import { useMessage } from "../hooks/message.hook";
+import React, { useState, useEffect, useContext } from "react";
+import { useHttp } from "../hooks/httpHook";
+import { useMessage } from "../hooks/messageHook";
+import { AuthContext } from "../context/AuthContext";
 
 export const AuthPage = () => {
+  const auth = useContext(AuthContext);
   const message = useMessage();
   const { loading, error, request, clearError } = useHttp();
   const [form, setForm] = useState({
@@ -15,6 +17,10 @@ export const AuthPage = () => {
     clearError();
   }, [error, message, clearError]);
 
+  useEffect(() => {
+    window.M.updateTextFields();
+  });
+
   const changeHandler = event => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
@@ -23,6 +29,13 @@ export const AuthPage = () => {
     try {
       const data = await request("/api/auth/register", "POST", { ...form });
       message(data.message);
+    } catch (error) {}
+  };
+
+  const loginHandler = async () => {
+    try {
+      const data = await request("/api/auth/login", "POST", { ...form });
+      auth.login(data.token);
     } catch (error) {}
   };
 
@@ -59,7 +72,7 @@ export const AuthPage = () => {
             </div>
           </div>
           <div className="card-action">
-            <button className="btn" disabled={loading}>
+            <button className="btn" disabled={loading} onClick={loginHandler}>
               Login
             </button>
             <button
