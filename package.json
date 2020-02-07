@@ -21,6 +21,7 @@
   "eslintConfig": {
     "extends": "Family_income_client"
   },
+  "proxy": "http://localhost:5000",
   "browserslist": {
     "production": [
       ">0.2%",
