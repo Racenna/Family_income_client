@@ -12,8 +12,6 @@ export const BudgetAdd = ({ onCreate }) => {
     onCreate(valueI, valueE);
     setValueI("");
     setValueE("");
-
-    // onCreate(valueI, valueE);
   }
 
   return (

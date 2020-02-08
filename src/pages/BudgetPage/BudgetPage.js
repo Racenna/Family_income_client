@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { BudgetAdd } from "./BudgetAdd";
 import { BudgetList } from "./BudgetList";
 import { useHttp } from "../../hooks/httpHook";
@@ -8,6 +8,23 @@ export const BudgetPage = () => {
   const auth = useContext(AuthContext);
   const [budgets, setBudgets] = useState([]);
   const { request } = useHttp();
+
+  useEffect(() => {
+    window.M.updateTextFields();
+  }, []);
+
+  const fetchBudgets = useCallback(async () => {
+    try {
+      const fetched = await request("/api/budget", "GET", null, {
+        Authorization: `Bearer ${auth.token}`
+      });
+      setBudgets(fetched);
+    } catch (error) {}
+  }, [auth, request]);
+
+  useEffect(() => {
+    fetchBudgets();
+  }, [fetchBudgets]);
 
   async function onCreate(income, expenses) {
     const body = {

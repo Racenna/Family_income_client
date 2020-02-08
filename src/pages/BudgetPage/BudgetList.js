@@ -15,7 +15,7 @@ export const BudgetList = props => {
 
       <tbody>
         {props.budgets.map(item => (
-          <BudgetItem key={item.id} budget={item} />
+          <BudgetItem key={item._id} budget={item} />
         ))}
       </tbody>
     </table>
