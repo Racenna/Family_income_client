@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../AuthPage/AuthContext";
 
 export const Navbar = () => {
   const history = useHistory();
@@ -16,15 +16,9 @@ export const Navbar = () => {
       <div className="nav-wrapper">
         <ul id="nav-mobile" className="right">
           <li>
-            <NavLink to="#">...1</NavLink>
-          </li>
-          <li>
-            <NavLink to="#">...2</NavLink>
-          </li>
-          <li>
-            <a href="/" onClick={logoutHandler}>
+            <NavLink to="/" onClick={logoutHandler}>
               Выйти
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>
