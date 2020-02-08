@@ -1,9 +1,17 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
 .card-action button {
-  margin-right: 4px;
+  margin-right: 1rem;
 }
 
 .addf {
-  margin-top: 5px;
+  margin-top: 0.5rem;
+}
+
+.brand-logo {
+  margin-left: 0.5rem;
+}
+
+.authp {
+  width: 70%;
 }
