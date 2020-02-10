@@ -42,10 +42,9 @@ export const AuthPage = () => {
   return (
     <div className="row authp">
       <div className="col s6 offset-s3">
-        <h1>AuthPage</h1>
+        <h1>Authorization page</h1>
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
-            <span className="card-title">Authorization</span>
             <div>
               <div className="input-field">
                 <input
