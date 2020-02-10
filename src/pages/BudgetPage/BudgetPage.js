@@ -4,6 +4,7 @@ import { BudgetList } from "./BudgetList";
 import { useHttp } from "../../hooks/httpHook";
 import { AuthContext } from "../AuthPage/AuthContext";
 import { useMessage } from "../../hooks/messageHook";
+import { BudgetContext } from "./BudgetContext";
 
 export const BudgetPage = () => {
   const auth = useContext(AuthContext);
@@ -53,17 +54,29 @@ export const BudgetPage = () => {
         { ...body },
         { Authorization: `Bearer ${auth.token}` }
       );
-      console.log(data);
-      message("Operation success");
+      message(data.message);
       setBudgets(budgets.concat([body]));
     } catch (error) {}
   }
 
+  async function deleteRecord(_id) {
+    try {
+      const data = await request(
+        "/api/budget/delete",
+        "DELETE",
+        { _id },
+        { Authorization: `Bearer ${auth.token}` }
+      );
+      message(data.message);
+      setBudgets(budgets.filter(item => item._id !== _id));
+    } catch (error) {}
+  }
+
   return (
-    <div>
+    <BudgetContext.Provider value={{ deleteRecord }}>
       <BudgetAdd onCreate={onCreate} />
       <hr />
       {budgets.length ? <BudgetList budgets={budgets} /> : <p>No records</p>}
-    </div>
+    </BudgetContext.Provider>
   );
 };

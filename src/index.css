@@ -20,6 +20,10 @@
   font-size: 2.4rem;
 }
 
+.nav-wrapper {
+  background-color: #26a69a;
+}
+
 body {
   background-color: #e0e0e0;
 }
