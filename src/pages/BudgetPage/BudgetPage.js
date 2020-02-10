@@ -3,11 +3,18 @@ import { BudgetAdd } from "./BudgetAdd";
 import { BudgetList } from "./BudgetList";
 import { useHttp } from "../../hooks/httpHook";
 import { AuthContext } from "../AuthPage/AuthContext";
+import { useMessage } from "../../hooks/messageHook";
 
 export const BudgetPage = () => {
   const auth = useContext(AuthContext);
+  const message = useMessage();
   const [budgets, setBudgets] = useState([]);
-  const { request } = useHttp();
+  const { request, error, clearError } = useHttp();
+
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [message, error, clearError]);
 
   useEffect(() => {
     window.M.updateTextFields();
