@@ -54,11 +54,9 @@ export const BudgetPage = () => {
         { Authorization: `Bearer ${auth.token}` }
       );
       console.log(data);
-      // message(data.message);
-    } catch (error) {
-      console.log({ ...body });
-    }
-    setBudgets(budgets.concat([body]));
+      message("Operation success");
+      setBudgets(budgets.concat([body]));
+    } catch (error) {}
   }
 
   return (
